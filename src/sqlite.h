@@ -6,7 +6,7 @@
 class SQLite 
 {
 	public:
-		void sql_insert();
+		void sql_insert(std::string table_name, std::string user_name, std::string user_pass);
 		void sql_delete();
 
 		SQLite(sqlite3 *user_db);

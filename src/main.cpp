@@ -21,7 +21,7 @@ split_string(std::string user_string)
 
 	while(cmd_buffer)
 	{
-			std::string temp;
+		std::string temp;
 		cmd_buffer >> temp;
 		splitted_string.push_back(temp);
 	}
