@@ -6,6 +6,11 @@
 #include <sqlite3.h>
 #include <stdlib.h>
 
+void print_stats(void)
+{
+	std::cout << "SQLite3 Info: " << sqlite3_libversion() << ":" << sqlite3_libversion_number();
+}
+
 std::vector<std::string>
 split_string(std::string user_string)
 {
@@ -14,7 +19,7 @@ split_string(std::string user_string)
 
 	while(cmd_buffer)
 	{
-		std::string temp;
+			std::string temp;
 		cmd_buffer >> temp;
 		splitted_string.push_back(temp);
 	}
