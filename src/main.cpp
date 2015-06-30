@@ -3,12 +3,15 @@
 
 #include <vector>
 
+#include <sqlite3.h>
+#include <stdlib.h>
+
 std::vector<std::string>
 split_string(std::string user_string)
 {
 	std::vector<std::string> splitted_string;
 	std::istringstream cmd_buffer(user_string);
-	
+
 	while(cmd_buffer)
 	{
 		std::string temp;
@@ -21,6 +24,8 @@ split_string(std::string user_string)
 
 int main(int argc, char* argv[])
 {
+	sqlite3* sqlite_db;
+
 	std::string user_cmd;
 	std::vector<std::string> cmd_words;
 
@@ -28,10 +33,23 @@ int main(int argc, char* argv[])
 	std::getline(std::cin, user_cmd);
 
 	cmd_words = split_string(user_cmd);
-	for(int i = 0; i < (int)cmd_words.size() - 1; i++)
+
+	if (cmd_words[0] == "ins")
 	{
-		std::cout << cmd_words[i] << "\n";	
-	}	
+		//do something	
+	}
+	else if(cmd_words[0] == "rm")
+	{
+		//do something
+	}
+	else if(cmd_words[0] == "exit" || cmd_words[0] == "quit")
+	{
+		exit(EXIT_SUCCESS);	
+	}
+	else
+	{
+		std::cout << "Invalid command.\n";
+	}
 
 	return 0;
 }
