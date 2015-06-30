@@ -6,11 +6,13 @@
 #include <sqlite3.h>
 #include <stdlib.h>
 
+// some info about the program itself and stuff used by the program
 void print_stats(void)
 {
-	std::cout << "SQLite3 Info: " << sqlite3_libversion() << ":" << sqlite3_libversion_number();
+	std::cout << "SQLite3 - " << sqlite3_libversion() << ":" << sqlite3_libversion_number() << "\n";
 }
 
+// splits the string from the command prompt
 std::vector<std::string>
 split_string(std::string user_string)
 {
@@ -27,12 +29,15 @@ split_string(std::string user_string)
 	return splitted_string;
 }
 
+// main function
 int main(int argc, char* argv[])
 {
 	sqlite3* sqlite_db;
 
 	std::string user_cmd;
 	std::vector<std::string> cmd_words;
+
+	print_stats();
 
 	std::cout << "Insert command: \n";
 	std::getline(std::cin, user_cmd);
