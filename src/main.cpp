@@ -6,9 +6,12 @@
 #include <sqlite3.h>
 #include <stdlib.h>
 
+#include "main.h"
+
 // some info about the program itself and stuff used by the program
 void print_stats(void)
 {
+	std::cout << "PassShelter - " << PSVERSION << "\n";
 	std::cout << "SQLite3 - " << sqlite3_libversion() << ":" << sqlite3_libversion_number() << "\n";
 }
 
