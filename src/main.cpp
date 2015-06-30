@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 #include "main.h"
+#include "sqlite.h"
 
 // some info about the program itself and stuff used by the program
 void print_stats(void)
@@ -28,7 +29,7 @@ split_string(std::string user_string)
 		cmd_buffer >> temp;
 		splitted_string.push_back(temp);
 	}
-
+	
 	return splitted_string;
 }
 
@@ -36,6 +37,7 @@ split_string(std::string user_string)
 int main(int argc, char* argv[])
 {
 	sqlite3* sqlite_db;
+	SQLite sql_class(sqlite_db);
 
 	std::string user_cmd;
 	std::vector<std::string> cmd_words;
@@ -47,22 +49,25 @@ int main(int argc, char* argv[])
 
 	cmd_words = split_string(user_cmd);
 
-	if (cmd_words[0] == "ins")
+	if(cmd_words.size() != 0)
 	{
-		//do something	
+		if (cmd_words[0] == "ins")
+		{
+				
+		}
+		else if(cmd_words[0] == "rm")
+		{
+			//do something
+		}
+		else if(cmd_words[0] == "exit" || cmd_words[0] == "quit")
+		{
+			exit(EXIT_SUCCESS);	
+		}
+		else
+		{
+			std::cout << "Invalid command.\n";
+		}
 	}
-	else if(cmd_words[0] == "rm")
-	{
-		//do something
-	}
-	else if(cmd_words[0] == "exit" || cmd_words[0] == "quit")
-	{
-		exit(EXIT_SUCCESS);	
-	}
-	else
-	{
-		std::cout << "Invalid command.\n";
-	}
-
+	
 	return 0;
 }
