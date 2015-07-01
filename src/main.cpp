@@ -36,7 +36,7 @@ split_string(std::string user_string)
 // main function
 int main(int argc, char* argv[])
 {
-	sqlite3* sqlite_db;
+	sqlite3* sqlite_db = NULL;
 	SQLite sql_class(sqlite_db);
 
 	std::string user_cmd;

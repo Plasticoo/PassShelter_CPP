@@ -28,7 +28,7 @@ void SQLite::sql_insert(std::string table_name, std::string user_name, std::stri
 {
 	int rc;
 	char* err_msg = 0;
-	std::string sql_stmt = "INSERT INTO " + table_name + " VALUES('" + user_name + "', '" + user_pass + "')";
+	const std::string sql_stmt = "INSERT INTO " + table_name + " VALUES('" + user_name + "', '" + user_pass + "')";
 
 	rc = sqlite3_exec(sql_db, sql_stmt.c_str(), 0, 0, &err_msg);
 
@@ -43,14 +43,35 @@ void SQLite::sql_insert(std::string table_name, std::string user_name, std::stri
 	{
 		std::cout << "Data inserted successfully!\n";
 		std::cout << "Data inserted: "
-					<< "\tTable: " << table_name
-					<< "\tUsername: " << user_name
-					<< "\tPassword: " << user_pass
-					<< "\n";
+			<< "\tTable: " << table_name
+			<< "\tUsername: " << user_name
+			<< "\tPassword: " << user_pass
+			<< "\n";
 	}
 }
 
-void SQLite::sql_delete()
+void SQLite::sql_delete(std::string table_name, std::string user_name, std::string user_pass)
 {
+	int rc;
+	char* err_msg = 0;                                                                                       
+	const std::string sql_stmt = "INSERT INTO " + table_name + " VALUES('" + user_name + "', '" + user_pass + "')";
 
+	rc = sqlite3_exec(sql_db, sql_stmt.c_str(), 0, 0, &err_msg);
+
+	if(rc != SQLITE_OK)
+	{
+		std::cerr << "Failed to delete data.\n";
+		std::cerr << "SQL Error - " << err_msg << "\n";
+
+		sqlite3_free(err_msg);
+	}
+	else
+	{
+		std::cout << "Data deleted successfully!\n";
+		std::cout << "Data delete: "
+			<< "\tTable: " << table_name
+			<< "\tUsername: " << user_name
+			<< "\tPassword: " << user_pass
+			<< "\n";
+	}
 }
