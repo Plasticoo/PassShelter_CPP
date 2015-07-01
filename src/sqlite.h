@@ -1,6 +1,7 @@
 #ifndef SQLITE_H_
 #define SQLITE_H_
 
+#include <iostream>
 #include <sqlite3.h>
 
 class SQLite 
@@ -14,6 +15,6 @@ class SQLite
 
 	private:
 		sqlite3 *sql_db;
-}
+};
 
 #endif
