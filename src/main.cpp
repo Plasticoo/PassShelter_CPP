@@ -5,9 +5,17 @@
 
 #include <sqlite3.h>
 #include <stdlib.h>
+#include <sys/stat.h>
 
 #include "main.h"
 #include "sqlite.h"
+
+// verify if file exists
+inline bool file_exists(const std::string& file_name)
+{
+	struct stat buffer;
+	return(stat(file_name.c_str(), &buffer) == 0); 
+}
 
 // some info about the program itself and stuff used by the program
 void print_stats(void)
