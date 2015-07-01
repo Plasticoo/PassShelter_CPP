@@ -17,7 +17,7 @@ void print_stats(void)
 }
 
 // splits the string from the command prompt
-std::vector<std::string>
+	std::vector<std::string>
 split_string(std::string user_string)
 {
 	std::vector<std::string> splitted_string;
@@ -29,7 +29,7 @@ split_string(std::string user_string)
 		cmd_buffer >> temp;
 		splitted_string.push_back(temp);
 	}
-	
+
 	return splitted_string;
 }
 
@@ -53,7 +53,14 @@ int main(int argc, char* argv[])
 	{
 		if (cmd_words[0] == "ins")
 		{
-				
+			if(cmd_words.size() == 4)
+			{
+				sql_class.sql_insert(cmd_words[1], cmd_words[2], cmd_words[3]);	
+			}
+			else
+			{
+				std::cout << "Wrong number of arguments.\n";
+			}
 		}
 		else if(cmd_words[0] == "rm")
 		{
@@ -68,6 +75,6 @@ int main(int argc, char* argv[])
 			std::cout << "Invalid command.\n";
 		}
 	}
-	
+
 	return 0;
 }
