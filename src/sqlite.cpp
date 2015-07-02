@@ -54,6 +54,7 @@ void SQLite::sql_delete(std::string table_name, std::string user_name, std::stri
 {
 	int rc;
 	char* err_msg = 0;                                                                                       
+	// TODO
 	const std::string sql_stmt = "INSERT INTO " + table_name + " VALUES('" + user_name + "', '" + user_pass + "')";
 
 	rc = sqlite3_exec(sql_db, sql_stmt.c_str(), 0, 0, &err_msg);

@@ -11,7 +11,7 @@
 #include "sqlite.h"
 
 // verify if file exists
-inline bool file_exists(const std::string& file_name)
+bool file_exists(const std::string& file_name)
 {
 	struct stat buffer;
 	return(stat(file_name.c_str(), &buffer) == 0); 
@@ -44,6 +44,7 @@ split_string(std::string user_string)
 // main function
 int main(int argc, char* argv[])
 {
+	std::string db_file = "pshelter.db";
 	sqlite3* sqlite_db = NULL;
 	SQLite sql_class(sqlite_db);
 
@@ -51,6 +52,16 @@ int main(int argc, char* argv[])
 	std::vector<std::string> cmd_words;
 
 	print_stats();
+
+	if(!file_exists(db_file))
+	{
+		std::cout << "File 'pshelter.db' does not exist. Creating...\n";
+		std::cout << "File successfully created.\n";
+	}
+	else
+	{
+		std::cout << "File 'pshelter.db' found.\n";
+	}
 
 	std::cout << "Insert command: \n";
 	std::getline(std::cin, user_cmd);
@@ -72,7 +83,14 @@ int main(int argc, char* argv[])
 		}
 		else if(cmd_words[0] == "rm")
 		{
-			//do something
+			if(cmd_words.size() == 4)
+			{
+				sql_class.sql_delete(cmd_words[1], cmd_words[2], cmd_words[3]);	
+			}
+			else
+			{
+				std::cout << "Wrong number of arguments.\n";
+			}
 		}
 		else if(cmd_words[0] == "exit" || cmd_words[0] == "quit")
 		{
