@@ -2,7 +2,7 @@ CC = clang++
 FLAGS = -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wfloat-equal -Wsign-compare -ggdb -std=c++11 -pedantic
 LIBS = -lsqlite3
 
-FILES = main.o sqlite.o aes.o
+FILES = main.o sqlite.o aes.o enc.o
 EXE = programa
 
 build: $(FILES)
@@ -17,6 +17,9 @@ sqlite.o: src/sqlite.cpp
 
 aes.o: src/aes.c
 	$(CC) $(FLAGS) -c src/aes.c
+
+enc.o: src/enc.cpp
+	$(CC) $(FLAGS) -c src/enc.cpp
 
 clean:
 	rm *.o
