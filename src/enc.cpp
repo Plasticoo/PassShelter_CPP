@@ -2,14 +2,31 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include <time.h>
+
 #include "aes.h"
 
-// print encrypted key
-void print_encripted_key(uint8_t buffer[], int b_size)
+#define IV_SIZE 16
+
+void generate_iv(uint8_t output_buf[IV_SIZE])
 {
 	int i;
 
-	for (i = 0; i < b_size; i++) 
+	srand(time(NULL));
+
+	for (i = 0; i < IV_SIZE; i++) 
+	{
+		// rand between 0x00 and 0xff
+		output_buf[i] = rand() % 0xff;	
+	}
+}
+
+// print encrypted key
+void print_encripted_key(uint8_t buffer[], int buff_size)
+{
+	int i;
+
+	for (i = 0; i < buff_size; i++) 
 	{
 		printf("%.2x", buffer[i]);
 	}	

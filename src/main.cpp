@@ -56,8 +56,6 @@ int main(int argc, char* argv[])
 	std::vector<std::string> cmd_words;
 
 	print_stats();
-	std::cout << "EncTest:\n";
-	aes_encrypt_cbc();
 
 	if(!file_exists(db_file))
 	{
