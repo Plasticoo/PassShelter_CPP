@@ -119,7 +119,6 @@ int main(int argc, char* argv[])
 				// loop = false;
 				exit(EXIT_SUCCESS);	
 			}
-
 			else
 			{
 				std::cout << "Invalid command.\n";
