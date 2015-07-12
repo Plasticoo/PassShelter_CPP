@@ -6,6 +6,7 @@
 void generate_iv(uint8_t output_buf[]);
 void generate_key(uint8_t output_buf[]);
 void generate_string(uint8_t output_buf[], int key_size);
-void print_encripted_key(uint8_t buffer[], int b_size);
+void print_encrypted_key(uint8_t buffer[], int buff_size);
+void print_decrypted_key(uint8_t buffer[], int buff_size);
 
 #endif

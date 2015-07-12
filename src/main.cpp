@@ -7,6 +7,7 @@
 #include <sqlite3.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <string.h>
 
 #include "main.h"
 #include "sqlite.h"
@@ -80,7 +81,7 @@ int main(int argc, char* argv[])
 		{
 			if (cmd_words[0] == "ins")
 			{
-				if(cmd_words.size() == 4)
+				if(cmd_words.size() == 5)
 				{
 					sql_class.sql_insert(cmd_words[1], cmd_words[2], cmd_words[3]);	
 				}
@@ -91,7 +92,7 @@ int main(int argc, char* argv[])
 			}
 			else if(cmd_words[0] == "rm")
 			{
-				if(cmd_words.size() == 4)
+				if(cmd_words.size() == 5)
 				{
 					sql_class.sql_delete(cmd_words[1], cmd_words[2], cmd_words[3]);	
 				}
@@ -102,17 +103,39 @@ int main(int argc, char* argv[])
 			}
 			else if(cmd_words[0] == "genkey")
 			{
-				uint8_t buff[32];
-				uint8_t iv[16];
-				uint8_t key[16];
-				uint8_t word[32];
+				uint8_t buff[32], iv[16], key[16], word[32];
 
 				generate_iv(iv);
 				generate_key(key);
 				generate_string(word, 32);
 				AES128_CBC_encrypt_buffer(buff, word, 32, key, iv);
 
-				print_encripted_key(buff, 32);
+				print_encrypted_key(buff, 32);
+			}
+			else if(cmd_words[0] == "test")
+			{
+				if(cmd_words.size() == 3)
+				{
+					//std::string word = "Isto_e_um_testee";
+					//uint8_t buff[16], iv[16], key[16];
+					int ws = cmd_words[1].length(); 
+					uint8_t buff[ws], iv[16], key[16], out[ws];
+					
+					generate_iv(iv);
+					generate_key(key);
+					AES128_CBC_encrypt_buffer(buff, (uint8_t*)cmd_words[1].c_str(), ws, key, iv);
+
+					print_encrypted_key(buff, ws);
+
+					AES128_CBC_decrypt_buffer(out, buff, ws, key, iv);
+
+					print_decrypted_key(out, ws);
+
+				}
+				else
+				{
+					std::cout << "Wrong number of arguments.\n";
+				}
 			}
 			else if(cmd_words[0] == "exit" || cmd_words[0] == "quit")
 			{

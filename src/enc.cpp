@@ -6,6 +6,9 @@
 
 #include "aes.h"
 
+// srand(time(NULL)) effect is global. But I use it in every function scope
+// to make it more random
+
 void generate_iv(uint8_t output_buf[])
 {
 	int i;
@@ -19,6 +22,7 @@ void generate_iv(uint8_t output_buf[])
 	}
 }
 
+// test purposes
 void generate_key(uint8_t output_buf[])
 {
 	int i;
@@ -32,6 +36,7 @@ void generate_key(uint8_t output_buf[])
 	}
 }
 
+// test purposes
 void generate_string(uint8_t output_buf[], int key_size)
 {
 	int i;	
@@ -46,7 +51,7 @@ void generate_string(uint8_t output_buf[], int key_size)
 }
 
 // print encrypted key
-void print_encripted_key(uint8_t buffer[], int buff_size)
+void print_encrypted_key(uint8_t buffer[], int buff_size)
 {
 	int i;
 
@@ -58,3 +63,14 @@ void print_encripted_key(uint8_t buffer[], int buff_size)
 	putchar('\n');
 }
 
+void print_decrypted_key(uint8_t buffer[], int buff_size)
+{
+	int i;
+
+	for (i = 0; i < buff_size; i++) 
+	{
+		printf("%c", buffer[i]);
+	}	
+
+	putchar('\n');
+}
