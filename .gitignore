@@ -3,3 +3,4 @@ pshelter.db
 programa
 /build/*
 /bin/*
+*.o
