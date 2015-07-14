@@ -15,6 +15,29 @@
 #include "aes.h"
 #include "enc.h"
 
+void print_help(const std::string& command)
+{
+	if(command == "ins")
+	{
+		std::cout << "Command to insert data.\n"
+			<< "Usage: ins [table] [username] [password]\n\n";
+	}
+	else if(command == "rm")
+	{
+		std::cout << "Command to delete data.\n"
+			<< "Usage: ins [table] [username] [password]\n\n";
+	}
+	else if(command == "")
+	{
+		std::cout << "Command to insert data.\n"
+			<< "Usage: ins [table] [username] [password]\n\n";
+	}
+	else
+	{
+		std::cout << "Command doesn't exist.\n";
+	}
+}
+
 // verify if file exists
 bool file_exists(const std::string& file_name)
 {
@@ -100,27 +123,14 @@ int main(int argc, char* argv[])
 				{
 					std::cout << "Wrong number of arguments.\n";
 				}
-			}
-			else if(cmd_words[0] == "genkey")
-			{
-				uint8_t buff[32], iv[16], key[16], word[32];
-
-				generate_iv(iv);
-				generate_key(key);
-				generate_string(word, 32);
-				AES128_CBC_encrypt_buffer(buff, word, 32, key, iv);
-
-				print_encrypted_key(buff, 32);
-			}
-			else if(cmd_words[0] == "test")
+			}	
+			else if(cmd_words[0] == "testenc")
 			{
 				if(cmd_words.size() == 3)
 				{
-					//std::string word = "Isto_e_um_testee";
-					//uint8_t buff[16], iv[16], key[16];
 					int ws = cmd_words[1].length(); 
 					uint8_t buff[ws], iv[16], key[16], out[ws];
-					
+
 					generate_iv(iv);
 					generate_key(key);
 					AES128_CBC_encrypt_buffer(buff, (uint8_t*)cmd_words[1].c_str(), ws, key, iv);
@@ -141,6 +151,10 @@ int main(int argc, char* argv[])
 			{
 				// loop = false;
 				exit(EXIT_SUCCESS);	
+			}
+			else if(cmd_words[0] == "help")
+			{
+				print_help(cmd_words[1]);
 			}
 			else
 			{
