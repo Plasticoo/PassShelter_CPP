@@ -13,8 +13,8 @@ SQLite::SQLite(sqlite3* user_db): sql_db(user_db)
 	if(rc != SQLITE_OK)
 	{
 		std::cerr << "[ERROR] - Couldn't open database - " 
-			<< __FILE__ << ":" << __LINE__ << "\n";
-		std::cerr << "ErrorMsg - " << sqlite3_errmsg(sql_db) << "\n";
+			<< __FILE__ << ":" << __LINE__ << "\n"
+			<< "ErrorMsg - " << sqlite3_errmsg(sql_db) << "\n";
 
 		sqlite3_close(sql_db);
 
@@ -54,15 +54,15 @@ void SQLite::sql_create(const std::string& table_name)
 
 	if(rc != SQLITE_OK)
 	{
-		std::cerr << "Failed to create table.\n";
-		std::cerr << "SQL Error - " << err_msg << "\n";
+		std::cerr << "Failed to create table.\n"
+			<< "SQL Error - " << err_msg << "\n";
 
 		sqlite3_free(err_msg);
 	}
 	else
 	{
-		std::cout << "Table created successfully!\n";
-		std::cout << "Table: " << table_name << "\n";
+		std::cout << "Table created successfully!\n"
+			<< "Table: " << table_name << "\n";
 	}
 }
 
@@ -76,15 +76,15 @@ void SQLite::sql_insert(const std::string& table_name, const std::string& user_n
 
 	if(rc != SQLITE_OK)
 	{
-		std::cerr << "Failed to insert data.\n";
-		std::cerr << "SQL Error - " << err_msg << "\n";
+		std::cerr << "Failed to insert data.\n"
+			<< "SQL Error - " << err_msg << "\n";
 
 		sqlite3_free(err_msg);
 	}
 	else
 	{
-		std::cout << "Data inserted successfully!\n";
-		std::cout << "Data inserted: "
+		std::cout << "Data inserted successfully!\n"
+			<< "Data inserted: \n"
 			<< "\tTable: " << table_name
 			<< "\tUsername: " << user_name
 			<< "\tPassword: " << user_pass
@@ -96,22 +96,21 @@ void SQLite::sql_delete(const std::string& table_name, const std::string& user_n
 {
 	int rc;
 	char* err_msg = 0;                                                                                       
-	// TODO
 	const std::string sql_stmt = "INSERT INTO " + table_name + " VALUES('" + user_name + "', '" + user_pass + "')";
 
 	rc = sqlite3_exec(sql_db, sql_stmt.c_str(), 0, 0, &err_msg);
 
 	if(rc != SQLITE_OK)
 	{
-		std::cerr << "Failed to delete data.\n";
-		std::cerr << "SQL Error - " << err_msg << "\n";
+		std::cerr << "Failed to delete data.\n"
+			<< "SQL Error - " << err_msg << "\n";
 
 		sqlite3_free(err_msg);
 	}
 	else
 	{
-		std::cout << "Data deleted successfully!\n";
-		std::cout << "Data delete: "
+		std::cout << "Data deleted successfully!\n"
+			<< "Data delete: \n"
 			<< "\tTable: " << table_name
 			<< "\tUsername: " << user_name
 			<< "\tPassword: " << user_pass
