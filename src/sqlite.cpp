@@ -43,7 +43,7 @@ int SQLite::callback(void* not_used, int argc, char** argv, char** col_name)
 	return 0;
 }
 
-void SQLite::sql_create(std::string table_name)
+void SQLite::sql_create(const std::string& table_name)
 {
 	int rc;
 	char* err_msg = 0;
@@ -66,7 +66,7 @@ void SQLite::sql_create(std::string table_name)
 	}
 }
 
-void SQLite::sql_insert(std::string table_name, std::string user_name, std::string user_pass)
+void SQLite::sql_insert(const std::string& table_name, const std::string& user_name, const std::string& user_pass)
 {
 	int rc;
 	char* err_msg = 0;
@@ -92,7 +92,7 @@ void SQLite::sql_insert(std::string table_name, std::string user_name, std::stri
 	}
 }
 
-void SQLite::sql_delete(std::string table_name, std::string user_name, std::string user_pass)
+void SQLite::sql_delete(const std::string& table_name, const std::string& user_name, const std::string& user_pass)
 {
 	int rc;
 	char* err_msg = 0;                                                                                       
