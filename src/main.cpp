@@ -135,12 +135,15 @@ int main(int argc, char* argv[])
 					generate_key(key);
 					AES128_CBC_encrypt_buffer(buff, (uint8_t*)cmd_words[1].c_str(), ws, key, iv);
 
+					std::cout << "\nEncrypted: ";
 					print_encrypted_key(buff, ws);
 
 					AES128_CBC_decrypt_buffer(out, buff, ws, key, iv);
 
+					std::cout << "Decrypted: ";
 					print_decrypted_key(out, ws);
 
+					putchar('\n');
 				}
 				else
 				{
