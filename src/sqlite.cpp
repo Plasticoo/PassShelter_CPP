@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include "sqlite.h"
+#include "callbacks.h"
 
 SQLite::SQLite(sqlite3* user_db): sql_db(user_db)
 {
@@ -25,22 +26,6 @@ SQLite::SQLite(sqlite3* user_db): sql_db(user_db)
 SQLite::~SQLite()
 {
 	sqlite3_close(sql_db);
-}
-
-// function that prints table info
-int SQLite::callback(void* not_used, int argc, char** argv, char** col_name)
-{
-	int i;
-	not_used = 0;
-
-	for (i = 0; i < argc; i++) 
-	{
-		printf("%s: %s | ", col_name[i], argv[i] ? argv[i] : "NULL");	
-	}
-
-	putchar('\n');
-
-	return 0;
 }
 
 void SQLite::sql_create(const std::string& table_name)
@@ -117,3 +102,39 @@ void SQLite::sql_delete(const std::string& table_name, const std::string& user_n
 			<< "\n";
 	}
 }
+
+void SQLite::sql_show_tables()
+{
+	int rc;
+	char* err_msg = 0;
+	const std::string sql_stmt = "SELECT name FROM sqlite_master WHERE type='table'";
+
+	rc = sqlite3_exec(sql_db, sql_stmt.c_str(), table_callback, 0, &err_msg);
+
+	if(rc != SQLITE_OK)
+	{
+		std::cerr << "Failed to delete data.\n"
+			<< "SQL Error - " << err_msg << "\n";
+
+		sqlite3_free(err_msg);
+	}
+}
+
+void SQLite::sql_show_data(const std::string& table_name)
+{
+	int rc;
+	char* err_msg = 0;
+	const std::string sql_stmt = "SELECT name FROM sqlite_master WHERE type='table'";
+
+	rc = sqlite3_exec(sql_db, sql_stmt.c_str(), column_callback, 0, &err_msg);
+
+	if(rc != SQLITE_OK)
+	{
+		std::cerr << "Failed to delete data.\n"
+			<< "SQL Error - " << err_msg << "\n";
+
+		sqlite3_free(err_msg);
+	}
+
+}
+
