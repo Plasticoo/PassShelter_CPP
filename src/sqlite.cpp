@@ -124,7 +124,7 @@ void SQLite::sql_show_data(const std::string& table_name)
 {
 	int rc;
 	char* err_msg = 0;
-	const std::string sql_stmt = "SELECT name FROM sqlite_master WHERE type='table'";
+	const std::string sql_stmt = "SELECT * FROM " + table_name;
 
 	rc = sqlite3_exec(sql_db, sql_stmt.c_str(), column_callback, 0, &err_msg);
 
@@ -135,6 +135,5 @@ void SQLite::sql_show_data(const std::string& table_name)
 
 		sqlite3_free(err_msg);
 	}
-
 }
 
