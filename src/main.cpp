@@ -115,9 +115,9 @@ int main(int argc, char* argv[])
 			}
 			else if(cmd_words[0] == "rm")
 			{
-				if(cmd_words.size() == 5)
+				if(cmd_words.size() == 4)
 				{
-					sql_class.sql_delete(cmd_words[1], cmd_words[2], cmd_words[3]);	
+					sql_class.sql_delete(cmd_words[1], cmd_words[2]);	
 				}
 				else
 				{

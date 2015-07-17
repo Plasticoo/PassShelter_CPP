@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "sqlite.h"
 #include "callbacks.h"
@@ -77,11 +78,11 @@ void SQLite::sql_insert(const std::string& table_name, const std::string& user_n
 	}
 }
 
-void SQLite::sql_delete(const std::string& table_name, const std::string& user_name, const std::string& user_pass)
+void SQLite::sql_delete(const std::string& table_name, const std::string& user_id)
 {
 	int rc;
 	char* err_msg = 0;                                                                                       
-	const std::string sql_stmt = "INSERT INTO " + table_name + " VALUES('" + user_name + "', '" + user_pass + "')";
+	const std::string sql_stmt = "DELETE FROM " + table_name + " WHERE ID = " + user_id + ";";
 
 	rc = sqlite3_exec(sql_db, sql_stmt.c_str(), 0, 0, &err_msg);
 
