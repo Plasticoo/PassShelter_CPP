@@ -29,8 +29,9 @@ void print_help(const std::string& command)
 	}
 	else if(command == "")
 	{
-		std::cout << "Command to insert data.\n"
-			<< "Usage: ins [table] [username] [password]\n\n";
+		std::cout << "List of commands:\n"
+			<< "\tins\n"
+			<< "\trm\n\n";
 	}
 	else
 	{

@@ -95,12 +95,7 @@ void SQLite::sql_delete(const std::string& table_name, const std::string& user_i
 	}
 	else
 	{
-		std::cout << "Data deleted successfully!\n"
-			<< "Data delete: \n"
-			<< "\tTable: " << table_name
-			<< "\tUsername: " << user_name
-			<< "\tPassword: " << user_pass
-			<< "\n";
+		std::cout << "Data deleted successfully from " + table_name + "!\n";
 	}
 }
 
