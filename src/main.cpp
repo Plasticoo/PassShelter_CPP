@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <fstream>
 
 #include <vector>
 
@@ -42,8 +43,8 @@ void print_help(const std::string& command)
 // verify if file exists
 bool file_exists(const std::string& file_name)
 {
-	struct stat buffer;
-	return(stat(file_name.c_str(), &buffer) == 0); 
+   ifstream ifile(file_name.c_str());
+   return ifile;
 }
 
 // some info about the program itself and stuff used by the program
