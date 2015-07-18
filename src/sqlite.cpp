@@ -78,7 +78,28 @@ void SQLite::sql_insert(const std::string& table_name, const std::string& user_n
 	}
 }
 
-void SQLite::sql_delete(const std::string& table_name, const std::string& user_id)
+void SQLite::sql_delete_table(const std::string& table_name)
+{
+	int rc;
+	char* err_msg = 0;                                                                                       
+	const std::string sql_stmt = "DROP TABLE " + table_name + ";";
+
+	rc = sqlite3_exec(sql_db, sql_stmt.c_str(), 0, 0, &err_msg);
+
+	if(rc != SQLITE_OK)
+	{
+		std::cerr << "Failed to delete table.\n"
+			<< "SQL Error - " << err_msg << "\n";
+
+		sqlite3_free(err_msg);
+	}
+	else
+	{
+		std::cout << "Table successfully deleted.\n";
+	}
+}
+
+void SQLite::sql_delete_data(const std::string& table_name, const std::string& user_id)
 {
 	int rc;
 	char* err_msg = 0;                                                                                       

@@ -71,13 +71,15 @@ split_string(std::string user_string)
 }
 
 // main function
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
-	std::string db_file = "pshelter.db";
 	sqlite3* sqlite_db = NULL;
+
 	SQLite sql_class(sqlite_db);
 
 	std::string user_cmd;
+	std::string db_file = "pshelter.db";
+
 	std::vector<std::string> cmd_words;
 
 	bool loop = true;
@@ -116,9 +118,13 @@ int main(int argc, char* argv[])
 			}
 			else if(cmd_words[0] == "rm")
 			{
-				if(cmd_words.size() == 4)
+				if(cmd_words.size() == 3)
 				{
-					sql_class.sql_delete(cmd_words[1], cmd_words[2]);	
+					sql_class.sql_delete_table(cmd_words[1]);	
+				}
+				else if(cmd_words.size() == 4)
+				{
+					sql_class.sql_delete_data(cmd_words[1], cmd_words[2]);	
 				}
 				else
 				{
