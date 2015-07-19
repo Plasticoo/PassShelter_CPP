@@ -29,7 +29,7 @@ SQLite::~SQLite()
 	sqlite3_close(sql_db);
 }
 
-void SQLite::sql_create(const std::string& table_name)
+void SQLite::create(const std::string& table_name)
 {
 	int rc;
 	char* err_msg = 0;
@@ -52,7 +52,7 @@ void SQLite::sql_create(const std::string& table_name)
 	}
 }
 
-void SQLite::sql_insert(const std::string& table_name, const std::string& user_name, const std::string& user_pass)
+void SQLite::insert(const std::string& table_name, const std::string& user_name, const std::string& user_pass)
 {
 	int rc;
 	char* err_msg = 0;
@@ -78,7 +78,7 @@ void SQLite::sql_insert(const std::string& table_name, const std::string& user_n
 	}
 }
 
-void SQLite::sql_delete_table(const std::string& table_name)
+void SQLite::delete_table(const std::string& table_name)
 {
 	int rc;
 	char* err_msg = 0;                                                                                       
@@ -99,7 +99,7 @@ void SQLite::sql_delete_table(const std::string& table_name)
 	}
 }
 
-void SQLite::sql_delete_data(const std::string& table_name, const std::string& user_id)
+void SQLite::delete_data(const std::string& table_name, const std::string& user_id)
 {
 	int rc;
 	char* err_msg = 0;                                                                                       
@@ -120,7 +120,7 @@ void SQLite::sql_delete_data(const std::string& table_name, const std::string& u
 	}
 }
 
-void SQLite::sql_show_tables()
+void SQLite::show_tables()
 {
 	int rc;
 	char* err_msg = 0;
@@ -137,7 +137,7 @@ void SQLite::sql_show_tables()
 	}
 }
 
-void SQLite::sql_show_data(const std::string& table_name)
+void SQLite::show_data(const std::string& table_name)
 {
 	int rc;
 	char* err_msg = 0;

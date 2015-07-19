@@ -84,19 +84,13 @@ int main(int argc, char** argv)
 {
 
 	std::string user_cmd;
-	std::string db_file = "pshelter.sqlite3";
+	std::string db_file_name = "pshelter.sqlite3";
 
 	std::vector<std::string> cmd_words;
 
 	bool loop = true;
 
-	sqlite3* sqlite_db = NULL;
-
-	SQLite sql_class(sqlite_db, db_file);
-
-	print_stats();
-
-	if(!file_exists(db_file))
+	if(!file_exists(db_file_name))
 	{
 		std::cout << "File 'pshelter.sqlite3' does not exist. Creating...\n";
 		std::cout << "File successfully created.\n";
@@ -105,6 +99,11 @@ int main(int argc, char** argv)
 	{
 		std::cout << "File 'pshelter.sqlite3' found.\n";
 	}
+
+	sqlite3* sqlite_db = NULL;
+	SQLite sql_class(sqlite_db, db_file_name);
+
+	print_stats();
 
 	while(loop)
 	{
@@ -119,7 +118,7 @@ int main(int argc, char** argv)
 			{
 				if(cmd_words.size() == 5)
 				{
-					sql_class.sql_insert(cmd_words[1], cmd_words[2], cmd_words[3]);	
+					sql_class.insert(cmd_words[1], cmd_words[2], cmd_words[3]);	
 				}
 				else
 				{
@@ -130,11 +129,11 @@ int main(int argc, char** argv)
 			{
 				if(cmd_words.size() == 3)
 				{
-					sql_class.sql_delete_table(cmd_words[1]);	
+					sql_class.delete_table(cmd_words[1]);	
 				}
 				else if(cmd_words.size() == 4)
 				{
-					sql_class.sql_delete_data(cmd_words[1], cmd_words[2]);	
+					sql_class.delete_data(cmd_words[1], cmd_words[2]);	
 				}
 				else
 				{
