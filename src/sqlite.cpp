@@ -6,11 +6,11 @@
 #include "sqlite.h"
 #include "callbacks.h"
 
-SQLite::SQLite(sqlite3* user_db): sql_db(user_db)
+SQLite::SQLite(sqlite3* user_db, std::string name): sql_db(user_db), db_name(name)
 {
 	int rc;
 
-	rc = sqlite3_open("pshelter.db", &sql_db);
+	rc = sqlite3_open(db_name.c_str(), &sql_db);
 
 	if(rc != SQLITE_OK)
 	{

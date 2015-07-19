@@ -7,7 +7,6 @@
 
 #include <sqlite3.h>
 #include <stdlib.h>
-#include <sys/stat.h>
 #include <string.h>
 
 #include "main.h"
@@ -43,8 +42,17 @@ void print_help(const std::string& command)
 // verify if file exists
 bool file_exists(const std::string& file_name)
 {
-   ifstream ifile(file_name.c_str());
-   return ifile;
+	std::ifstream f(file_name.c_str());
+
+	if(f.good())
+	{
+		f.close();
+		return true;
+	}
+	else
+	{
+		return false;
+	}	
 }
 
 // some info about the program itself and stuff used by the program
@@ -74,27 +82,28 @@ split_string(std::string user_string)
 // main function
 int main(int argc, char** argv)
 {
-	sqlite3* sqlite_db = NULL;
-
-	SQLite sql_class(sqlite_db);
 
 	std::string user_cmd;
-	std::string db_file = "pshelter.db";
+	std::string db_file = "pshelter.sqlite3";
 
 	std::vector<std::string> cmd_words;
 
 	bool loop = true;
 
+	sqlite3* sqlite_db = NULL;
+
+	SQLite sql_class(sqlite_db, db_file);
+
 	print_stats();
 
 	if(!file_exists(db_file))
 	{
-		std::cout << "File 'pshelter.db' does not exist. Creating...\n";
+		std::cout << "File 'pshelter.sqlite3' does not exist. Creating...\n";
 		std::cout << "File successfully created.\n";
 	}
 	else
 	{
-		std::cout << "File 'pshelter.db' found.\n";
+		std::cout << "File 'pshelter.sqlite3' found.\n";
 	}
 
 	while(loop)

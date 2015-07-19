@@ -15,11 +15,12 @@ class SQLite
 		void sql_show_tables();
 		void sql_show_data(const std::string& table_name);
 
-		SQLite(sqlite3 *user_db);
+		SQLite(sqlite3 *user_db, std::string name);
 		~SQLite();
 
 	private:
 		sqlite3 *sql_db;
+		std::string db_name;
 };
 
 #endif
