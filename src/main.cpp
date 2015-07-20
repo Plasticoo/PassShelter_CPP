@@ -139,7 +139,18 @@ int main(int argc, char** argv)
 				{
 					std::cout << "Wrong number of arguments.\n";
 				}
-			}	
+			}
+			else if(cmd_words[0] == "show")
+			{
+				if(cmd_words.size() == 3)
+				{
+					sql_class.show_data(cmd_words[1]);	
+				}
+				else
+				{
+					sql_class.show_tables();
+				}
+			}
 			else if(cmd_words[0] == "testenc")
 			{
 				if(cmd_words.size() == 3)
