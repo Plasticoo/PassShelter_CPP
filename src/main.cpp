@@ -19,23 +19,33 @@ void print_help(const std::string& command)
 {
 	if(command == "ins")
 	{
-		std::cout << "Command to insert data.\n"
-			<< "Usage: ins [table] [username] [password]\n\n";
+		std::cout << "\nCommand to insert data.\n"
+			<< "Usage:\n"
+			<< "\tins [table] [username] [password]\n\n";
 	}
 	else if(command == "rm")
 	{
-		std::cout << "Command to delete data.\n"
-			<< "Usage: ins [table] [username] [password]\n\n";
+		std::cout << "\nCommand to delete data.\n"
+			<< "Usage:\n"
+			<< "\tins [table] [id]\n\n";
+	}
+	else if(command == "show")
+	{
+		std::cout << "\nCommand to show tables or data in tables.\n"
+			<< "Usage:\n" 
+			<< "\tshow\n"
+			<< "\tshow [table]\n\n";
 	}
 	else if(command == "")
 	{
-		std::cout << "List of commands:\n"
+		std::cout << "\nList of commands:\n"
 			<< "\tins\n"
-			<< "\trm\n\n";
+			<< "\trm\n"
+			<< "\tshow\n\n";
 	}
 	else
 	{
-		std::cout << "Command doesn't exist.\n";
+		std::cout << "\nCommand doesn't exist.\n\n";
 	}
 }
 
@@ -114,7 +124,18 @@ int main(int argc, char** argv)
 
 		if(cmd_words.size() != 0)
 		{
-			if (cmd_words[0] == "ins")
+			if(cmd_words[0] == "create")
+			{
+				if(cmd_words.size() == 3)
+				{
+					sql_class.create(cmd_words[1]);
+				}
+				else
+				{
+					std::cout << "\nWrong number of arguments.\n";	
+				}
+			}
+			else if(cmd_words[0] == "ins")
 			{
 				if(cmd_words.size() == 5)
 				{
@@ -122,7 +143,7 @@ int main(int argc, char** argv)
 				}
 				else
 				{
-					std::cout << "Wrong number of arguments.\n";
+					std::cout << "\nWrong number of arguments.\n";
 				}
 			}
 			else if(cmd_words[0] == "rm")
@@ -137,7 +158,7 @@ int main(int argc, char** argv)
 				}
 				else
 				{
-					std::cout << "Wrong number of arguments.\n";
+					std::cout << "\nWrong number of arguments.\n";
 				}
 			}
 			else if(cmd_words[0] == "show")
@@ -174,12 +195,12 @@ int main(int argc, char** argv)
 				}
 				else
 				{
-					std::cout << "Wrong number of arguments.\n";
+					std::cout << "\nWrong number of arguments.\n";
 				}
 			}
 			else if(cmd_words[0] == "exit" || cmd_words[0] == "quit")
 			{
-				// loop = false;
+				sql_class.~SQLite();
 				exit(EXIT_SUCCESS);	
 			}
 			else if(cmd_words[0] == "help")
