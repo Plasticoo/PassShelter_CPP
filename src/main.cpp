@@ -176,17 +176,17 @@ int main(int argc, char** argv)
 			{
 				if(cmd_words.size() == 3)
 				{
-					int ws = cmd_words[1].length(); 
+					int ws = (int)cmd_words[1].length(); 
 					uint8_t buff[ws], iv[16], key[16], out[ws];
 
 					generate_iv(iv);
 					generate_key(key);
-					AES128_CBC_encrypt_buffer(buff, (uint8_t*)cmd_words[1].c_str(), ws, key, iv);
+					AES128_CBC_encrypt_buffer(buff, (uint8_t*)cmd_words[1].c_str(), (unsigned int)ws, key, iv);
 
 					std::cout << "\nEncrypted: ";
 					print_encrypted_key(buff, ws);
 
-					AES128_CBC_decrypt_buffer(out, buff, ws, key, iv);
+					AES128_CBC_decrypt_buffer(out, buff, (unsigned int)ws, key, iv);
 
 					std::cout << "Decrypted: ";
 					print_decrypted_key(out, ws);
@@ -213,5 +213,6 @@ int main(int argc, char** argv)
 			}
 		}
 	}
+
 	return 0;
 }

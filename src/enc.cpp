@@ -6,19 +6,19 @@
 
 #include "aes.h"
 
-// srand(time(NULL)) effect is global. But I use it in every function scope
+// srand((unsigned int)time(NULL)) effect is global. But I use it in every function scope
 // to make it more random
 
 void generate_iv(uint8_t output_buf[])
 {
 	int i;
 
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 
 	for (i = 0; i < 16; i++) // IV_SIZE = 16
 	{
 		// rand between 0x00 and 0xff
-		output_buf[i] = rand() % 0xff;	
+		output_buf[i] = (uint8_t)(rand() % 0xff);	
 	}
 }
 
@@ -27,12 +27,12 @@ void generate_key(uint8_t output_buf[])
 {
 	int i;
 
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 
 	for (i = 0; i < 16; i++) // KEY_SIZE = 16
 	{
 		// rand between 0x00 and 0xff
-		output_buf[i] = rand() % 0xff;	
+		output_buf[i] = (uint8_t)(rand() % 0xff);	
 	}
 }
 
@@ -41,12 +41,12 @@ void generate_string(uint8_t output_buf[], int key_size)
 {
 	int i;	
 
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 
 	for (i = 0; i < key_size; i++)
 	{
 		// rand between 0x00 and 0xff
-		output_buf[i] = rand() % 0xff;	
+		output_buf[i] = (uint8_t)(rand() % 0xff);	
 	}
 }
 

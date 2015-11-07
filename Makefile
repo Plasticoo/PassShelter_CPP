@@ -1,5 +1,5 @@
 CC = clang++ 
-FLAGS = -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wfloat-equal -Wsign-compare -ggdb -std=c++11 -pedantic
+FLAGS = -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wfloat-equal -Wconversion -Wsign-compare -Wextra-tokens  -ggdb -std=c++11 -pedantic
 LIBS = -lsqlite3
 
 FILES = main.o sqlite.o aes.o enc.o callbacks.o
