@@ -3,7 +3,7 @@ FLAGS = -Wall -Wextra -Wshadow -Wpointer-arith -Wcast-qual -Wfloat-equal -Wsign-
 LIBS = -lsqlite3
 
 FILES = main.o sqlite.o aes.o enc.o callbacks.o
-EXE = programa
+EXE = passshelter
 
 build: $(FILES)
 	$(CC) $(FLAGS) $(FILES) -o $(EXE) $(LIBS)
